@@ -8,9 +8,12 @@ import (
 	"image/draw"
 	"image/png"
     "github.com/disintegration/imaging"
+	"fmt"
 )
 
-const base string = "hoodie"
+const base = "hoodie"
+var topLeftBound = image.Pt(164, 107)
+var bottomRightBound = image.Pt(387, 315)
 
 func check(e error) {
 	if e != nil {
@@ -73,10 +76,16 @@ func main() {
 	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 0644)
 	check(err)
 
-	sourceImage = imaging.Fit(sourceImage, size.Max.X, size.Max.Y, imaging.Lanczos)
+	boundsSize := image.Pt(bottomRightBound.X-topLeftBound.X, bottomRightBound.Y-topLeftBound.Y)
+	bounds := image.Rect(topLeftBound.X, topLeftBound.Y, bottomRightBound.X, bottomRightBound.Y)
+
+	fmt.Println(boundsSize)
+	fmt.Println(bounds)
+
+	sourceImage = imaging.Fit(sourceImage, boundsSize.X, boundsSize.Y, imaging.Lanczos)
 
 	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
-	draw.Draw(finalImage, finalImage.Bounds(), sourceImage, image.Pt(0, 0), draw.Over)
+	draw.Draw(finalImage, bounds, sourceImage, image.Pt(0,0), draw.Over)
 	draw.Draw(finalImage, finalImage.Bounds(), frontImage, image.Pt(0, 0), draw.Over)
 
 	png.Encode(output, finalImage)
