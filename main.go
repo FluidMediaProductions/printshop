@@ -8,6 +8,8 @@ import (
 	"image/draw"
 	"image/png"
     "github.com/disintegration/imaging"
+	"encoding/json"
+	"io/ioutil"
 )
 
 const base = "hoodie"
@@ -20,9 +22,22 @@ func check(e error) {
 	}
 }
 
-func loadBaseImages(name string) (image.Image, image.Image) {
-	backFile := "imgs/"+name+"-b.png"
-	frontFile := "imgs/"+name+"-f.png"
+func loadImageConfig(name string) (string, string, image.Point, image.Point) {
+	jsonText, err := ioutil.ReadFile("config/"+name+".json")
+	check(err)
+
+	var dat map[string]interface{}
+
+	if err := json.Unmarshal([]byte(jsonText), &dat); err != nil {
+		panic(err)
+	}
+
+	return dat["front"].(string), dat["back"].(string), image.Pt(0,0), image.Pt(0,0)
+}
+
+func loadBaseImages(backName string, frontName string) (image.Image, image.Image) {
+	backFile := "imgs/"+backName
+	frontFile := "imgs/"+frontName
 	frontExists := true
 
 	if _, err := os.Stat(backFile); os.IsNotExist(err) {
@@ -56,7 +71,8 @@ func loadBaseImages(name string) (image.Image, image.Image) {
 
 func main() {
 	sourceFile := "source.png"
-	backImage, frontImage := loadBaseImages(base)
+	front, back, _, _ := loadImageConfig(base)
+	backImage, frontImage := loadBaseImages(front, back)
 
 	size := backImage.Bounds()
 

@@ -1,0 +1,12 @@
+{
+  "back": "hoodie-b.png",
+  "front": "hoodie-f.png",
+  "topLeft": {
+    "X": 164,
+    "Y": 107
+  },
+  "bottomRight": {
+    "X": 387,
+    "Y": 315
+  }
+}
