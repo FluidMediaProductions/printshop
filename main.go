@@ -67,9 +67,12 @@ func main() {
 	sourceImage, _, err := image.Decode(source)
 	check(err)
 
+	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 644)
+	check(err)
+
 	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
 	draw.Draw(finalImage, finalImage.Bounds(), sourceImage, image.Pt(0, 0), draw.Over)
 	draw.Draw(finalImage, finalImage.Bounds(), frontImage, image.Pt(0, 0), draw.Over)
 
-	png.Encode()
+	png.Encode(output, finalImage)
 }
