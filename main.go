@@ -7,6 +7,7 @@ import (
 	"image"
 	"image/draw"
 	"image/png"
+	"fmt"
 )
 
 const base string = "hoodie"
@@ -39,7 +40,7 @@ func loadBaseImages(name string) (image.Image, image.Image) {
 		front, err := os.Open(frontFile)
 		defer front.Close()
 		check(err)
-		frontImage, _, err := image.Decode(front)
+		frontImage, _, err = image.Decode(front)
 		check(err)
 		if frontImage.Bounds() != backImage.Bounds() {
 			panic("Front and back images are not the same size")
@@ -53,8 +54,9 @@ func loadBaseImages(name string) (image.Image, image.Image) {
 
 func main() {
 	sourceFile := "source.png"
-	frontImage, backImage := loadBaseImages(base)
+	backImage, frontImage := loadBaseImages(base)
 
+	fmt.Println(backImage.Bounds())
 	finalImage := image.NewNRGBA(backImage.Bounds())
 
 	if _, err := os.Stat(sourceFile); os.IsNotExist(err) {
@@ -67,7 +69,7 @@ func main() {
 	sourceImage, _, err := image.Decode(source)
 	check(err)
 
-	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 644)
+	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 0644)
 	check(err)
 
 	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
