@@ -7,7 +7,7 @@ import (
 	"image"
 	"image/draw"
 	"image/png"
-	"fmt"
+    "github.com/disintegration/imaging"
 )
 
 const base string = "hoodie"
@@ -56,8 +56,9 @@ func main() {
 	sourceFile := "source.png"
 	backImage, frontImage := loadBaseImages(base)
 
-	fmt.Println(backImage.Bounds())
-	finalImage := image.NewNRGBA(backImage.Bounds())
+	size := backImage.Bounds()
+
+	finalImage := image.NewNRGBA(size)
 
 	if _, err := os.Stat(sourceFile); os.IsNotExist(err) {
 		panic("Source file does not exist")
@@ -71,6 +72,8 @@ func main() {
 
 	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 0644)
 	check(err)
+
+	sourceImage = imaging.Fit(sourceImage, size.Max.X, size.Max.Y, imaging.Lanczos)
 
 	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
 	draw.Draw(finalImage, finalImage.Bounds(), sourceImage, image.Pt(0, 0), draw.Over)
