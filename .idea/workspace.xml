@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7f03542-c42d-43dd-82a7-f5048445ae84" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
       <change beforePath="$PROJECT_DIR$/out.png" afterPath="$PROJECT_DIR$/out.png" />
     </list>
@@ -28,10 +27,10 @@
       <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+            <state relative-caret-position="313">
+              <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
               <folding>
-                <element signature="e#14#144#0" expanded="true" />
+                <element signature="e#14#137#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,10 +167,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+        <state relative-caret-position="313">
+          <caret line="74" column="43" lean-forward="false" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
           <folding>
-            <element signature="e#14#144#0" expanded="true" />
+            <element signature="e#14#137#0" expanded="true" />
           </folding>
         </state>
       </provider>

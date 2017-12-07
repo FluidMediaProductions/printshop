@@ -8,7 +8,6 @@ import (
 	"image/draw"
 	"image/png"
     "github.com/disintegration/imaging"
-	"fmt"
 )
 
 const base = "hoodie"
@@ -77,12 +76,13 @@ func main() {
 	check(err)
 
 	boundsSize := image.Pt(bottomRightBound.X-topLeftBound.X, bottomRightBound.Y-topLeftBound.Y)
-	bounds := image.Rect(topLeftBound.X, topLeftBound.Y, bottomRightBound.X, bottomRightBound.Y)
-
-	fmt.Println(boundsSize)
-	fmt.Println(bounds)
 
 	sourceImage = imaging.Fit(sourceImage, boundsSize.X, boundsSize.Y, imaging.Lanczos)
+	sourceImageSize := sourceImage.Bounds()
+
+	pos := image.Pt((topLeftBound.X+boundsSize.X/2)-(sourceImageSize.Max.X/2),
+		(topLeftBound.Y+boundsSize.Y/2)-(sourceImageSize.Max.Y/2))
+	bounds := image.Rect(pos.X, pos.Y, pos.X+boundsSize.X, pos.Y+boundsSize.Y)
 
 	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
 	draw.Draw(finalImage, bounds, sourceImage, image.Pt(0,0), draw.Over)
