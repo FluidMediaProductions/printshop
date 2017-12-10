@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c73fe741-e707-4101-a54a-ac9870501200" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/printshop.iml" afterPath="$PROJECT_DIR$/.idea/printshop.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
+      <change beforePath="$PROJECT_DIR$/out.png" afterPath="$PROJECT_DIR$/out.png" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,19 +15,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+            <state relative-caret-position="619">
+              <caret line="118" column="78" lean-forward="false" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
               <folding>
-                <element signature="e#14#167#0" expanded="true" />
+                <element signature="e#14#174#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="out.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hoodie.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/hoodie.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>.(int)</find>
+    </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
@@ -37,6 +59,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -74,6 +97,11 @@
             <path>
               <item name="printshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="printshop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="printshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="printshop" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -140,11 +168,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/out.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -155,11 +178,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        <state relative-caret-position="619">
+          <caret line="118" column="78" lean-forward="false" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
           <folding>
-            <element signature="e#14#167#0" expanded="true" />
+            <element signature="e#14#174#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/hoodie.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

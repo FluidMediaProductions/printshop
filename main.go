@@ -10,11 +10,11 @@ import (
     "github.com/disintegration/imaging"
 	"encoding/json"
 	"io/ioutil"
+	"fmt"
 )
 
-const base = "hoodie"
-var topLeftBound = image.Pt(164, 107)
-var bottomRightBound = image.Pt(387, 315)
+const baseName = "hoodie"
+const sourceFile = "source.png"
 
 func check(e error) {
 	if e != nil {
@@ -22,7 +22,14 @@ func check(e error) {
 	}
 }
 
-func loadImageConfig(name string) (string, string, image.Point, image.Point) {
+type baseImage struct {
+	backImage image.Image
+	frontImage image.Image
+	topLeftBound image.Point
+	bottomRightBound image.Point
+}
+
+func loadImageConfig(name string) baseImage {
 	jsonText, err := ioutil.ReadFile("config/"+name+".json")
 	check(err)
 
@@ -32,7 +39,19 @@ func loadImageConfig(name string) (string, string, image.Point, image.Point) {
 		panic(err)
 	}
 
-	return dat["front"].(string), dat["back"].(string), image.Pt(0,0), image.Pt(0,0)
+	backImage, frontImage := loadBaseImages(dat["back"].(string), dat["front"].(string))
+
+	topLeftBound := image.Pt(int(dat["topLeft"].(map[string]interface{})["X"].(float64)),
+		int(dat["topLeft"].(map[string]interface{})["Y"].(float64)))
+	bottomRightBound := image.Pt(int(dat["bottomRight"].(map[string]interface{})["X"].(float64)),
+		int(dat["bottomRight"].(map[string]interface{})["Y"].(float64)))
+
+	return baseImage{
+		backImage: backImage,
+		frontImage: frontImage,
+		topLeftBound: topLeftBound,
+		bottomRightBound: bottomRightBound,
+	}
 }
 
 func loadBaseImages(backName string, frontName string) (image.Image, image.Image) {
@@ -70,11 +89,9 @@ func loadBaseImages(backName string, frontName string) (image.Image, image.Image
 }
 
 func main() {
-	sourceFile := "source.png"
-	front, back, _, _ := loadImageConfig(base)
-	backImage, frontImage := loadBaseImages(front, back)
+	base := loadImageConfig(baseName)
 
-	size := backImage.Bounds()
+	size := base.backImage.Bounds()
 
 	finalImage := image.NewNRGBA(size)
 
@@ -91,18 +108,19 @@ func main() {
 	output, err := os.OpenFile("out.png", os.O_CREATE|os.O_WRONLY, 0644)
 	check(err)
 
-	boundsSize := image.Pt(bottomRightBound.X-topLeftBound.X, bottomRightBound.Y-topLeftBound.Y)
+	boundsSize := image.Pt(base.bottomRightBound.X-base.topLeftBound.X,
+		base.bottomRightBound.Y-base.topLeftBound.Y)
 
 	sourceImage = imaging.Fit(sourceImage, boundsSize.X, boundsSize.Y, imaging.Lanczos)
 	sourceImageSize := sourceImage.Bounds()
 
-	pos := image.Pt((topLeftBound.X+boundsSize.X/2)-(sourceImageSize.Max.X/2),
-		(topLeftBound.Y+boundsSize.Y/2)-(sourceImageSize.Max.Y/2))
+	pos := image.Pt((base.topLeftBound.X+boundsSize.X/2)-(sourceImageSize.Max.X/2),
+		(base.topLeftBound.Y+boundsSize.Y/2)-(sourceImageSize.Max.Y/2))
 	bounds := image.Rect(pos.X, pos.Y, pos.X+boundsSize.X, pos.Y+boundsSize.Y)
 
-	draw.Draw(finalImage, finalImage.Bounds(), backImage, image.Pt(0, 0), draw.Over)
+	draw.Draw(finalImage, finalImage.Bounds(), base.backImage, image.Pt(0, 0), draw.Over)
 	draw.Draw(finalImage, bounds, sourceImage, image.Pt(0,0), draw.Over)
-	draw.Draw(finalImage, finalImage.Bounds(), frontImage, image.Pt(0, 0), draw.Over)
+	draw.Draw(finalImage, finalImage.Bounds(), base.frontImage, image.Pt(0, 0), draw.Over)
 
 	png.Encode(output, finalImage)
 }
