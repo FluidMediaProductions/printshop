@@ -8,8 +8,6 @@ import (
 	"os"
 )
 
-const baseName = "hoodie"
-const sourceFile = "source.png"
 
 func check(e error) {
 	if e != nil {

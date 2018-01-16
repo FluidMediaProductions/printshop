@@ -2,6 +2,8 @@ package main
 
 import (
 	"image"
+	_ "image/png"
+	_ "image/jpeg"
 	"os"
 	"io/ioutil"
 	"encoding/json"
